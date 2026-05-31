@@ -25,6 +25,13 @@ inputs:
     description: PAT with write access to the registry repo
     required: true
 
+  registry-repo:
+    description: >
+      The owner/repo of the vcpkg registry.
+      Defaults to the repo this action is part of.
+    required: false
+    default: knoxfighter/vcpkg-registry
+
   bot-email:
     description: Git author email for commits and tags
     required: false
@@ -130,22 +137,9 @@ runs:
       #if: steps.ver.outputs.changed == 'true'
       uses: actions/checkout@v6
       with:
-        repository: ${{ github.action_repository }}
+        repository: ${{ inputs.registry-repo }}
         token: ${{ inputs.registry-pat }}
         path: registry
-
-    - id: vars
-      shell: bash
-      run: |
-        echo "${{ github.action_repository }}"
-
-    - name: Test
-      shell: bash
-      run: |
-        echo "${{ github.action_path }}"
-        cd ${{ github.action_path }}
-        tree
-        exit 1
 
     # ----------------------------------------------------------
     # 4. Copy vcpkg.json into the registry, then optionally
