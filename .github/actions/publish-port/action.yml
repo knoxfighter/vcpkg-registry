@@ -127,12 +127,18 @@ runs:
     #    lives — i.e. the registry itself.
     # ----------------------------------------------------------
     - name: Checkout registry
-      if: steps.ver.outputs.changed == 'true'
-      uses: actions/checkout@v4
+      #if: steps.ver.outputs.changed == 'true'
+      uses: actions/checkout@v6
       with:
         repository: ${{ github.action_repository }}
         token: ${{ inputs.registry-pat }}
         path: registry
+
+    - name: Test
+      shell: bash
+      run: |
+        cd registry
+        tree
 
     # ----------------------------------------------------------
     # 4. Copy vcpkg.json into the registry, then optionally
