@@ -1,11 +1,8 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
   "name": "arcdps-extension",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "dependencies": [
-    "gtest",
-    "magic-enum",
-    "nlohmann-json",
     {
       "name": "vcpkg-cmake",
       "host": true
@@ -13,7 +10,10 @@
     {
       "name": "vcpkg-cmake-config",
       "host": true
-    }
+    },
+    "gtest",
+    "magic-enum",
+    "nlohmann-json"
   ],
   "default-features": [
     "curl",
@@ -42,7 +42,7 @@
       ]
     },
     "unofficial-extras": {
-      "description": "make tools available, that depend on arcdps-unofficial-extras",
+      "description": "make tools available, that depend on arcdps-unofficial-extras. test",
       "dependencies": [
         "arcdps-unofficial-extras"
       ]
